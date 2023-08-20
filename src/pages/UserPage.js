@@ -35,10 +35,11 @@ import USERLIST from '../_mock/user';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'role', label: 'Role', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
+  { id: 'company', label: 'Address', alignRight: false },
+  { id: 'role', label: 'Mobile', alignRight: false },
+  { id: 'isVerified', label: 'Email', alignRight: false },
+  {id : '',label:"Date of Registry",alignRight:false},
+  { id: 'status', label: 'Admin', alignRight: false },
   { id: '' },
 ];
 
@@ -155,7 +156,7 @@ export default function UserPage() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            User
+            Users
           </Typography>
           <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
