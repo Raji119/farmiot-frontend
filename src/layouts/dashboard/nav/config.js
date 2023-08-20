@@ -18,7 +18,7 @@ const navConfig = [
   },
   {
     title: 'Tenant',
-    path: '/dashboard/product',
+    path: '/dashboard/products',
     icon: icon('ic_user'),
   },
   {
