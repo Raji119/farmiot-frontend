@@ -1,70 +1,60 @@
 import { Helmet } from 'react-helmet-async';
-import { faker } from '@faker-js/faker';
 import { useEffect, useState } from 'react';
-// @mui
-import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
-// components
 import Iconify from '../components/iconify';
-// sections
-// import {
-//   AppTasks,
-//   AppNewsUpdate,
-//   AppOrderTimeline,
-//   AppCurrentVisits,
-//   AppWebsiteVisits,
-//   AppTrafficBySite,
-//   AppWidgetSummary,
-//   AppCurrentSubject,
-//   AppConversionRates,
-// } from '../sections/@dashboard/app';
-
-// ----------------------------------------------------------------------
 
 export default function SensorValues() {
-  const theme = useTheme();
+  const [sensorValue, setSensorValue] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // const [sensorValue, setSensorValue] = useState([]);
-  let sensorValue = [];
-  const renderValue = async () => {
+  const fetchSensorValue = async () => {
     try {
       const response = await fetch("http://localhost:4001/api/get-sensor-value", {
         method: "POST",
         headers: {device_id: 1, uid: 5}
       });
       const jsonData = await response.json();
-      // setSensorValue(jsonData[0]);
-      sensorValue = jsonData;
-      console.log(sensorValue[0]);
+      setSensorValue(jsonData);
     } catch (err) {
       console.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    renderValue();
+    fetchSensorValue();
   }, []);
+
+  const RenderSensor = () => {
+    return (
+      <>
+        <Helmet>
+          <title> Sensor values </title>
+        </Helmet>
+        
+        {loading ? (
+          <h1>Loading...</h1>
+        ) : sensorValue.length > 0 ? (
+          <ul className="">
+            {sensorValue.map((sv) => (
+              <button key={sv.device_id}
+                // onClick={}
+              >{ sv.description }</button>
+            ))}
+          </ul>
+        ) : (
+          <h1>No devices</h1>
+        )}
+      </>
+    );
+  };
+
+  
 
   return (
     <>
-      <Helmet>
-        <title> Sensor values </title>
-      </Helmet>
-
-     { sensorValue.length > 0 ? 
-        <ul className="">
-        {sensorValue[0].map((sv) => (
-          <li
-            key={sv.device_id}
-            // onClick={() => (window.location = `/products/${cat.category}`)}
-            // variant="outlined"
-          >
-            {sv.description}
-          </li>
-        ))}
-      </ul> : <h1>No devices</h1>}
-
-
+      <RenderSensor />
     </>
   );
 }
