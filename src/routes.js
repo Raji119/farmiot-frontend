@@ -9,7 +9,7 @@ import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
-import SensorValues from './pages/SensorValues';
+import DevicesList from './pages/DevicesList';
 
 // ----------------------------------------------------------------------
 
@@ -23,8 +23,8 @@ export default function Router() {
         { path: 'app', element: <DashboardAppPage /> },
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
-        { path: 'sensor-values', element: <SensorValues /> },
+        { path: 'devices', element: <BlogPage /> },
+        { path: 'sensor-values', element: <DevicesList /> },
       ],
     },
     {
