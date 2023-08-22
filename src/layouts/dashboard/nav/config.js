@@ -23,7 +23,7 @@ const navConfig = [
   },
   {
     title: 'Devices',
-    path: '/dashboard/blog',
+    path: '/dashboard/devices',
     icon: icon('ic_lock'),
   },
   {
