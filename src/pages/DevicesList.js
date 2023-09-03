@@ -13,7 +13,7 @@ export default function DevicesList() {
     try {
       const response = await fetch("http://localhost:4001/api/get-devices", {
         method: "GET",
-        headers: { user_id: 5, device_id: 1 }
+        headers: { user_id: 5 }
       });
       const jsonData = await response.json();
       setDevices(jsonData);
