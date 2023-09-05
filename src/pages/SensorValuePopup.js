@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './SensorValuePopup.css'; // Import the CSS file
+import GaugeChart from 'react-gauge-chart';
 
 const SensorValuePopup = ({ sensorId, onClose }) => {
   const [sensorValues, setSensorValues] = useState([]);   // Whole set of values in array
@@ -39,7 +40,17 @@ const SensorValuePopup = ({ sensorId, onClose }) => {
       <div className="sensor-value-popup">
         <h2>Sensor Value</h2>
         {!loading ? (
-          <p>{sensorValues[0].value}</p>
+          <>
+            <GaugeChart
+              id="sensor-gauge"
+              nrOfLevels={10}
+              colors={["#FF5F6D", "#FFC371"]}
+              arcWidth={0.3}
+              percent={sensorValues.length > 0 ? parseFloat(sensorValues[0].value) / 100 : 0}
+              animate
+            />
+            <p>{sensorValues[0].value}</p>
+          </>
         ) : (
           <p>Loading...</p>
         )}
