@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from 'react';
+
+// @mui
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 import SensorValuePopup from './SensorValuePopup'; // Import the new component
 
 const SensorPopup = ({ deviceId, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [sensorParams, setSensorParams] = useState([]);
   const [selectedSensorId, setSelectedSensorId] = useState(null);
+  const [sensor, setSensor] = useState();
+
+  const handleChange = (event) => {
+    setSensor(event.target.value);
+    handleSensorClick(event.target.value)
+  };
 
   const fetchSensorParams = async () => {
     try {
@@ -36,18 +49,31 @@ const SensorPopup = ({ deviceId, onClose }) => {
         {loading ? (
           <h1>Loading...</h1>
         ) : sensorParams.length > 0 ? (
-          <ul className="">
-            {sensorParams.map((sv) => (
-              <button
-                key={sv.sensor_id}
-                onClick={() => handleSensorClick(sv.sensor_id)}
-              >{sv.key}</button>
-            ))}
-          </ul>
+          <>
+            <h3>Sensors</h3>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <Select
+                value={sensor}
+                onChange={handleChange}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Without label' }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+
+                {sensorParams.map((sv) => (
+                  <MenuItem
+                    value={sv.sensor_id}
+                  >{sv.key}</MenuItem>
+                ))}
+              </Select>
+              <FormHelperText>Select devices</FormHelperText>
+            </FormControl>
+              </>
         ) : (
-          <h1>No Sensors</h1>
+          <h3>No Sensors</h3>
         )}
-        <button onClick={onClose}>Close</button>
         {selectedSensorId !== null && (
           <SensorValuePopup
             sensorId={selectedSensorId}
