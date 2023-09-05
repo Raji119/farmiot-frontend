@@ -1,6 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import { useEffect, useState } from 'react';
 
+// @mui
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 // Components
 import SensorPopup from './SensorPop';
 
@@ -8,6 +14,12 @@ export default function DevicesList() {
   const [devices, setDevices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedDevice, setSelectedDevice] = useState(null);
+  const [device, setDevice] = useState();
+
+  const handleChange = (event) => {
+    setDevice(event.target.value);
+    openSensorPopup(event.target.value)
+  };
 
   const fetchDevicesList = async () => {
     try {
@@ -44,16 +56,30 @@ export default function DevicesList() {
         </Helmet>
 
         {loading ? (
-          <h1>Loading...</h1>
+          <h2>Loading...</h2>
         ) : devices.length > 0 ? (
-          <ul className="">
-            {devices.map((sv) => (
-              <button
-                key={sv.device_id}
-                onClick={() => openSensorPopup(sv.device_id)}
-              >{sv.description}</button>
-            ))}
-          </ul>
+          <>
+            <h1>Devices</h1>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <Select
+                value={device}
+                onChange={handleChange}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Without label' }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+
+                {devices.map((sv) => (
+                  <MenuItem
+                    value={sv.device_id}
+                  >{sv.description}</MenuItem>
+                ))}
+              </Select>
+              <FormHelperText>Select devices</FormHelperText>
+            </FormControl>
+          </>
         ) : (
           <h1>No devices</h1>
         )}
