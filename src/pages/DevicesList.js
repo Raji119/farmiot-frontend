@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 // Components
+import Loader from '../components/loading/Loading';
 import SensorPopup from './SensorPop';
 
 export default function DevicesList() {
@@ -56,7 +57,7 @@ export default function DevicesList() {
         </Helmet>
 
         {loading ? (
-          <h2>Loading...</h2>
+          <Loader />
         ) : devices.length > 0 ? (
           <>
             <h1>Devices</h1>
