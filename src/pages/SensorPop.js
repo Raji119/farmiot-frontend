@@ -68,7 +68,7 @@ const SensorPopup = ({ deviceId, onClose }) => {
                   >{sv.key}</MenuItem>
                 ))}
               </Select>
-              <FormHelperText>Select devices</FormHelperText>
+              <FormHelperText>Select Sensors</FormHelperText>
             </FormControl>
               </>
         ) : (
