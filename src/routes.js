@@ -10,6 +10,7 @@ import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import DevicesList from './pages/DevicesList';
+import AddDevice from './pages/AddDeviceForm';
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,7 @@ export default function Router() {
         { path: 'sensor-values', element: <DevicesList /> },
       ],
     },
+    { path: 'add-device', element: <AddDevice /> },
     {
       path: 'login',
       element: <LoginPage />,
