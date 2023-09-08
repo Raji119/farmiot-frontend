@@ -1,11 +1,15 @@
 import { Helmet } from 'react-helmet-async';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // @mui
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import Cookies from 'js-cookie';
 
 // Components
 import Loader from '../components/loading/Loading';
@@ -17,16 +21,19 @@ export default function DevicesList() {
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [device, setDevice] = useState();
 
+  const navigate = useNavigate();
+
   const handleChange = (event) => {
     setDevice(event.target.value);
     openSensorPopup(event.target.value)
   };
 
   const fetchDevicesList = async () => {
+    const uid = Cookies.get('uid')
     try {
       const response = await fetch("http://localhost:4001/api/get-devices", {
         method: "GET",
-        headers: { user_id: 5 }
+        headers: { user_id: uid }
       });
       const jsonData = await response.json();
       setDevices(jsonData);
@@ -36,6 +43,10 @@ export default function DevicesList() {
       setLoading(false);
     }
   };
+
+  const navigateHandle = () => {
+    navigate('/add-device', { replace: true });
+  }
 
   useEffect(() => {
     fetchDevicesList();
@@ -55,6 +66,14 @@ export default function DevicesList() {
         <Helmet>
           <title> Sensor values </title>
         </Helmet>
+
+        <Button 
+            variant="contained" 
+            startIcon={<AddIcon />}
+            onClick={navigateHandle}    
+        >
+          Add device
+        </Button>
 
         {loading ? (
           <Loader />
