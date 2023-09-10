@@ -26,11 +26,11 @@ const navConfig = [
     path: '/dashboard/devices',
     icon: icon('ic_lock'),
   },
-  {
-    title: 'Sensor values',
-    path: '/dashboard/sensor-values',
-    icon: icon('ic_analytics'),
-  },
+  // {
+  //   title: 'Sensor values',
+  //   path: '/dashboard/sensor-values',
+  //   icon: icon('ic_analytics'),
+  // },
   {
     title: 'Report',
     path: '/login',
