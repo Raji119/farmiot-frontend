@@ -30,7 +30,7 @@ export default function LoginForm() {
         if(jsonData.token){
           Cookies.set('token', jsonData.token, {expires: 2})
           Cookies.set('uid', jsonData.uid, {expires: 2})
-          // setCookie();
+        
           navigate('/dashboard', { replace: true });
         } 
       } else {
