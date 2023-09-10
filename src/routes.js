@@ -26,9 +26,9 @@ export default function Router() {
         { path: 'products', element: <ProductsPage /> },
         { path: 'devices', element: <DevicesListTable /> },
         { path: 'sensor-values', element: <DevicesList /> },
+        { path: 'add-device', element: <AddDevice /> },
       ],
     },
-    { path: 'add-device', element: <AddDevice /> },
     {
       path: 'login',
       element: <LoginPage />,
@@ -38,13 +38,13 @@ export default function Router() {
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
         { path: '404', element: <Page404 /> },
-        { path: '*', element: <Navigate to="/404" /> },
+        // { path: '*', element: <Navigate to="/404" /> },
       ],
     },
-    {
-      path: '*',
-      element: <Navigate to="/404" replace />,
-    },
+    // {
+    //   path: '*',
+    //   element: <Navigate to="/404" replace />,
+    // },
   ]);
 
   return routes;
