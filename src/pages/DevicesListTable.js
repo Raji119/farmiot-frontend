@@ -22,6 +22,7 @@ const DevicesListTable = () => {
     const [devices, setDevices] = useState([])
     const [loading, setLoading] = useState(true)
     const [searchQuery, setSearchQuery] = useState("")
+
     const navigate = useNavigate()
 
     const navigateHandle = () => {
@@ -47,7 +48,9 @@ const DevicesListTable = () => {
                     headers: { user_id: uid }
                 });
                 const jsonData = await response.json();
-                setDevices(jsonData);
+                if(!jsonData.error){
+                    setDevices(jsonData);
+                }
                 console.log(jsonData)
             } catch (err) {
                 console.error(err.message);
