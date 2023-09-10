@@ -3,14 +3,14 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
 //
-import DevicesListTable from './pages/DevicesListTable';
+import DevicesListTable from './pages/DevicesListTable/DevicesListTable';
 import UserPage from './pages/UserPage';
 import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import DevicesList from './pages/DevicesList';
-import AddDevice from './pages/AddDeviceForm';
+import AddDevice from './pages/AddDevice/AddDeviceForm';
 
 // ----------------------------------------------------------------------
 
@@ -41,10 +41,10 @@ export default function Router() {
         // { path: '*', element: <Navigate to="/404" /> },
       ],
     },
-    // {
-    //   path: '*',
-    //   element: <Navigate to="/404" replace />,
-    // },
+    {
+      path: '*',
+      element: <Navigate to="/404" replace />,
+    },
   ]);
 
   return routes;
