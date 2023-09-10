@@ -1,0 +1,47 @@
+/* AddDevice.css */
+
+/* .MuiStack-root {
+    margin-bottom: 16px; /* Adjust the margin value as needed */
+
+
+/* Container styling */
+/* AddDevice.css */
+
+/* Container styling */
+.add-device-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 320px; /* Adjust the maximum width as needed */
+    margin: 0 auto;
+  }
+  
+  /* Text field styling */
+  .MuiTextField-root {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  /* Button styling */
+  .MuiButton-containedPrimary {
+    background-color: #2196F3;
+    color: #fff;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: #1976D2;
+    }
+  }
+  
+  /* Button icon styling */
+  .MuiButton-containedPrimary .MuiSvgIcon-root {
+    margin-right: 8px;
+  }
+  
+  /* Responsive styling */
+  @media (min-width: 768px) {
+    .add-device-container {
+      max-width: 400px; /* Adjust the maximum width for larger screens */
+    }
+  }
+  
