@@ -29,7 +29,7 @@ export default function LoginForm() {
         const jsonData = await response.json();
         if(jsonData.token){
           Cookies.set('token', jsonData.token, {expires: 2})
-          Cookies.set('uid', jsonData.uid)
+          Cookies.set('uid', jsonData.uid, {expires: 2})
           // setCookie();
           navigate('/dashboard', { replace: true });
         } 
