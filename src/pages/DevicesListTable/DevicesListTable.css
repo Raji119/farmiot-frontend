@@ -1,0 +1,19 @@
+.MuiDataGrid-root .MuiDataGrid-row:focus {
+    outline: none;
+}
+
+.MuiDataGrid-root .MuiDataGrid-cell:focus {
+    outline: none;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus {
+    outline: none;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus .MuiDataGrid-sortIcon {
+    outline: none;
+}
+
+.MuiDataGrid-root .MuiDataGrid-colCell:focus .MuiDataGrid-colCellSortable .MuiDataGrid-sortIcon {
+    outline: none;
+  }
