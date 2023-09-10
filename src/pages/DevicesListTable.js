@@ -26,7 +26,7 @@ const DevicesListTable = () => {
     const navigate = useNavigate()
 
     const navigateHandle = () => {
-        navigate('/add-device', { replace: true });
+        navigate('../add-device', { replace: true });
     }
 
     const devicesWithUniqueId = devices.map((device, index) => ({
