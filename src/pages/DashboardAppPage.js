@@ -139,7 +139,7 @@ export default function DashboardAppPage() {
 
               <Grid item xs={12} md={6} lg={4}>
                 <AppCurrentVisits
-                  title="Farm Land Areas"
+                  title="Telecom tower areas"
                   chartData={[
                     { label: 'Karnataka', value: 4344 },
                     { label: 'Andhra Pradesh', value: 5435 },
