@@ -11,14 +11,14 @@ import account from '../../../_mock/account';
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
-  {
-    label: 'Home',
-    icon: 'eva:home-fill',
-  },
-  {
-    label: 'Profile',
-    icon: 'eva:person-fill',
-  },
+  // {
+  //   label: 'Home',
+  //   icon: 'eva:home-fill',
+  // },
+  // {
+  //   label: 'Profile',
+  //   icon: 'eva:person-fill',
+  // },
   {
     label: 'Settings',
     icon: 'eva:settings-2-fill',
@@ -30,19 +30,31 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
 
+  const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
+
   const navigate = useNavigate();
+
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
 
   const handleClose = () => {
+    // Cookies.remove('token')
+    // Cookies.remove('uid')
+    // localStorage.removeItem('isAdmin')
+    // navigate('/login', { replace: true });
+    setOpen(null);
+
+  };
+
+  const handleLogout = () => {
     Cookies.remove('token')
     Cookies.remove('uid')
     navigate('/login', { replace: true });
     setOpen(null);
-
-  };
+  }
 
   return (
     <>
@@ -106,7 +118,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </Popover>
