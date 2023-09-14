@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------
 
 const account = {
-  displayName: 'Farm IOT',
+  displayName: 'Telecomm Tower Dashboard',
   email: 'farmIot@gmail.com',
  // photoURL: '/assets/images/avatars/avatar_default.jpg',
 };
