@@ -9,7 +9,6 @@ import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import ManagerListTable from './pages/ManagerListTable/ManagerListTable';
 import DashboardAppPage from './pages/DashboardAppPage';
-import DevicesList from './pages/DevicesList';
 import AddDevice from './pages/AddDevice/AddDeviceForm';
 import SensorValuePage from './pages/SensorValue/SensorValuePage';
 
@@ -26,7 +25,6 @@ export default function Router() {
         { path: 'user', element: <UserListTable /> },
         { path: 'products', element: <ManagerListTable /> },
         { path: 'devices', element: <DevicesListTable /> },
-        { path: 'sensor-values', element: <DevicesList /> },
         { path: 'add-device', element: <AddDevice /> },
       ],
     },
