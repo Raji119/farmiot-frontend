@@ -4,13 +4,14 @@ import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
 //
 import DevicesListTable from './pages/DevicesListTable/DevicesListTable';
-import UserPage from './pages/UserPage';
+import UserListTable from './pages/UserListTable/UserListTable';
 import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
-import ProductsPage from './pages/ProductsPage';
+import ManagerListTable from './pages/ManagerListTable/ManagerListTable';
 import DashboardAppPage from './pages/DashboardAppPage';
 import DevicesList from './pages/DevicesList';
 import AddDevice from './pages/AddDevice/AddDeviceForm';
+import SensorValuePage from './pages/SensorValue/SensorValuePage';
 
 // ----------------------------------------------------------------------
 
@@ -22,13 +23,14 @@ export default function Router() {
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
         { path: 'app', element: <DashboardAppPage /> },
-        { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
+        { path: 'user', element: <UserListTable /> },
+        { path: 'products', element: <ManagerListTable /> },
         { path: 'devices', element: <DevicesListTable /> },
         { path: 'sensor-values', element: <DevicesList /> },
         { path: 'add-device', element: <AddDevice /> },
       ],
     },
+    {path: 'sensor-value/:device_id', element: <SensorValuePage/>},
     {
       path: 'login',
       element: <LoginPage />,
@@ -41,10 +43,10 @@ export default function Router() {
         // { path: '*', element: <Navigate to="/404" /> },
       ],
     },
-    {
-      path: '*',
-      element: <Navigate to="/404" replace />,
-    },
+    // {
+    //   path: '*',
+    //   element: <Navigate to="/404" replace />,
+    // },
   ]);
 
   return routes;
