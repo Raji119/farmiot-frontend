@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import GaugeChart from 'react-gauge-chart';
-
 import './SensorValuePage.css'
+import Sensor from './Sensor';
 
 const SensorValuePage = () => {
   const [loading, setLoading] = useState(true);
-  const [sensorParams, setSensorParams] = useState([]);
-  const [sensorValues, setSensorValues] = useState([])
   const { "device_id": deviceId } = useParams();
-  const [sensorValues1, setSensorValues1] = useState([])
+  const [sensorValues, setSensorValues] = useState([])
 
   const encodedDeviceId = encodeURIComponent(deviceId)
 
@@ -21,9 +18,27 @@ const SensorValuePage = () => {
       return 1.0;
     }
       return (value - minValue) / (maxValue - minValue);
-    
+  }
+
+  const patternMatch = (parameter) => {
+
+    parameter = parameter.toLowerCase()
+
+    if (parameter.includes("current")){
+      return 1
+    }
+    if (parameter.includes("voltage")){
+      return 2
+    }
+    if (parameter.includes("temperature")){
+      return 3
+    }
+    return 4
   }
   
+  const val = patternMatch("abc jk voltage temperaturEnb jh")
+  console.log(val);
+
   const fetchSensorParams = async () => {
     try {
       // Fetch sensor parameters
@@ -38,7 +53,7 @@ const SensorValuePage = () => {
       }
 
       const jsonData = await response.json();
-      setSensorValues1(jsonData);
+      setSensorValues(jsonData);
       // console.log(`Fetched New sensor value for sensor:`, jsonData);
       setLoading(true)
     } catch (err) {
@@ -56,38 +71,29 @@ const SensorValuePage = () => {
   return (
     <div>
       {!loading ? (
-        <>
-          <p>Loaded</p>
-          {sensorValues1.map((dataItem) => (
-            <div className='chart' key={dataItem.sensor_id}>
-              <GaugeChart
-                id="sensor-gauge"
-                nrOfLevels={10}
-                colors={["#FF5F6D", "#FFC371"]}
-                textColor="#000000" 
-                arcWidth={0.34}
-                percent={calculatePercent(dataItem.value, dataItem.minvalue, dataItem.maxvalue)}
-                key={dataItem.sensor_id}
-                animate
-              />
-              <center key={dataItem.device_id}>
-                {dataItem.key} : {dataItem.value !== null ? dataItem.value : 'Loading...'} {dataItem.siunit}
-                <div>
-                  Minimum value: {dataItem.minvalue} 
-                </div>
-                <div>
-                  Maximum value: {dataItem.maxvalue}
-                </div>
-                <p>{dataItem.value}</p>
-              </center>
-            </div>
-          ))}
-        </>
+        <center className='flex-box'>
+          {sensorValues.map((dataItem) => {
+            const type = patternMatch(dataItem.key);
+            return <Sensor 
+              type={type} 
+              sensorId={dataItem.sensor_id}
+              minvalue={dataItem.minvalue}
+              maxvalue={dataItem.maxvalue}
+              deviceKey={dataItem.key}
+              value={dataItem.value}
+              siunit={dataItem.siunit}
+              deviceId={deviceId}
+            />
+          })}
+        </center>
       ) : (
         <p>Loading...</p>
       )}
+  
+        
     </div>
   );
+  
 };
 
 export default SensorValuePage;
