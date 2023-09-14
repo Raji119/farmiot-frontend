@@ -38,6 +38,14 @@ const DevicesListTable = () => {
         device.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    const handleRowClick = (rowData) => {
+        console.log("Clicked row: " , rowData.id);
+        const encodeDeviceId = encodeURIComponent(rowData.id)
+        console.log(encodeDeviceId);
+        // navigate(`../../sensor-value/${encodeDeviceId}`)
+        window.open(`../../sensor-value/${encodeDeviceId}`, "_blank")
+    }
+
     useEffect(() => {
 
         const fetchDevicesList = async () => {
@@ -87,7 +95,21 @@ const DevicesListTable = () => {
                         style={{ margin: "16px 0" }}
                     />
                     <div style={{ height: 400, width: '100%' }}>
-                        <DataGrid rows={filteredDevices} columns={columns} pageSize={10} />
+                        <DataGrid 
+                            rows={filteredDevices} 
+                            columns={columns} 
+                            pageSize={10} 
+                            sx={{
+                                boxShadow: 2,
+                                border: 2,
+                                borderColor: 'primary.light',
+                                '& .MuiDataGrid-cell:hover': {
+                                  color: 'primary.main',
+                                },
+                              }}
+                            onRowClick={(params) => {handleRowClick(params.row)}}
+                            
+                        />
                     </div>
                 </>
             ) : (
