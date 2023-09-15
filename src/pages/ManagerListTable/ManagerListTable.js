@@ -11,7 +11,7 @@ import Loader from "../../components/loading/Loading";
 
 
 const columns = [
-    { field: 'name', headerName: 'Manager-Name', flex: 1 },
+    { field: 'name', headerName: 'Manager Name', flex: 1 },
     { field: 'address', headerName: 'Address', flex: 1 },
     { field: 'mobile', headerName: 'Mobile', flex: 1 },
     { field: 'email', headerName: 'Email', flex: 1 },
@@ -25,11 +25,11 @@ const ManagerListTable = () => {
     const navigate = useNavigate()
 
     const navigateHandle = () => {
-        navigate('../add-device', { replace: true });
+        navigate('../add-manager', { role: "manager" }, { replace: true });
     }
 
     const managersWithUniqueId = managers.map((manager, index) => ({
-        id: manager.uid, // Use device_id as the unique identifier
+        id: manager.uid, // Use manager_id as the unique identifier
         ...manager,
     }));
 
@@ -45,10 +45,10 @@ const ManagerListTable = () => {
             try {
                 const response = await fetch("http://localhost:4001/api/get-tenant-user", {
                     method: "GET",
-                    headers: { uid , role}
+                    headers: { uid, role }
                 });
                 const jsonData = await response.json();
-                if(!jsonData.error){
+                if (!jsonData.error) {
                     setManagers(jsonData);
                 }
                 console.log(jsonData)
@@ -71,13 +71,13 @@ const ManagerListTable = () => {
                 startIcon={<AddIcon />}
                 onClick={navigateHandle}
             >
-                Add device
+                Add Manager
             </Button>
             {loading ? (
                 <Loader />
             ) : managers.length > 0 ? (
                 <>
-                    <h1>Devices</h1>
+                    <h1>Managers</h1>
                     <TextField
                         label="Search by Description"
                         variant="outlined"
@@ -88,18 +88,18 @@ const ManagerListTable = () => {
                     />
                     <center>
                         <div style={{ height: 400, width: '75%' }}>
-                            <DataGrid 
-                                rows={filteredManagers} 
-                                columns={columns} 
-                                pageSize={10} 
+                            <DataGrid
+                                rows={filteredManagers}
+                                columns={columns}
+                                pageSize={10}
                                 sx={{
                                     boxShadow: 2,
                                     border: 2,
                                     borderColor: 'primary.light',
                                     '& .MuiDataGrid-cell:hover': {
-                                    color: 'primary.main',
+                                        color: 'primary.main',
                                     },
-                                }}    
+                                }}
                             />
                         </div>
                     </center>
