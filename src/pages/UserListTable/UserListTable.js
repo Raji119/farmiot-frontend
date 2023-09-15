@@ -13,7 +13,7 @@ import "./UserListTable.css"
 
 
 const columns = [
-    { field: 'name', headerName: 'Manager-Name', flex: 1 },
+    { field: 'name', headerName: 'User Name', flex: 1 },
     { field: 'address', headerName: 'Address', flex: 1 },
     { field: 'mobile', headerName: 'Mobile', flex: 1 },
     { field: 'email', headerName: 'Email', flex: 1 },
@@ -27,11 +27,11 @@ const UserListTable = () => {
     const navigate = useNavigate()
 
     const navigateHandle = () => {
-        navigate('../add-device', { replace: true });
+        navigate('../add-user', { replace: true });
     }
 
     const usersWithUniqueId = users.map((user, index) => ({
-        id: user.uid, // Use device_id as the unique identifier
+        id: user.uid, // Use user_id as the unique identifier
         ...user,
     }));
 
@@ -84,15 +84,15 @@ const UserListTable = () => {
                 startIcon={<AddIcon />}
                 onClick={navigateHandle}
             >
-                Add device
+                Add User
             </Button>
             {loading ? (
                 <Loader />
             ) : users.length > 0 ? (
                 <>
-                    <h1>Devices</h1>
+                    <h1>Users</h1>
                     <TextField
-                        label="Search by Description"
+                        label="Search by Name"
                         variant="outlined"
                         fullWidth
                         value={searchQuery}
