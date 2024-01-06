@@ -13,30 +13,29 @@ import Iconify from '../../../components/iconify';
 export default function LoginForm() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClick = async() => {
+  const handleClick = async () => {
     try {
-      const response = await fetch('http://localhost:4001/api/login', {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ email, password })
-      })
+      const response = await fetch(`${config.apiUrl}/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-      if(response.status === 200){
+      if (response.status === 200) {
         const jsonData = await response.json();
-        if(jsonData.token){
-          Cookies.set('token', jsonData.token, {expires: 2})
-          Cookies.set('uid', jsonData.uid, {expires: 2})
-        
+        if (jsonData.token) {
+          Cookies.set('token', jsonData.token, { expires: 2 });
+          Cookies.set('uid', jsonData.uid, { expires: 2 });
+
           navigate('/dashboard', { replace: true });
-        } 
+        }
       } else {
-        alert("Wrong email or password")
+        alert('Wrong email or password');
       }
-      
     } catch (err) {
       console.log(err.message);
     }
@@ -44,20 +43,20 @@ export default function LoginForm() {
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
-  }
+  };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-  }
+  };
 
-  const onWebLoad =async() => {
+  const onWebLoad = async () => {
     const token = Cookies.get('token');
-    console.log(token)
+    console.log(token);
     if (token) {
-      const response = await fetch('http://localhost:4001/api/authenticate', {
-        method: "GET",
-        headers: { "Content-Type": "application/json", "Authorization": token },
-      })
+      const response = await fetch(`${config.apiUrl}/api/authenticate`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', Authorization: token },
+      });
 
       console.log(response);
 
@@ -65,11 +64,11 @@ export default function LoginForm() {
         navigate('/dashboard/app', { replace: true });
       }
     }
-  } 
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     onWebLoad();
-  },[])
+  }, []);
 
   return (
     <>

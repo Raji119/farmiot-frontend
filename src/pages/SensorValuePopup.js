@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import './SensorValuePopup.css'; // Import the CSS file
+import config from '../config';
 import GaugeChart from 'react-gauge-chart';
 
 const SensorValuePopup = ({ sensorId, onClose }) => {
-  const [sensorValues, setSensorValues] = useState([]);   // Whole set of values in array
+  const [sensorValues, setSensorValues] = useState([]); // Whole set of values in array
   const [loading, setLoading] = useState(true);
 
   const fetchSensorValue = async (sensorId) => {
     try {
-      const response = await fetch("http://localhost:4001/api/get-sensor-value", {
-            method: "GET",
-            headers: { sensor_id: sensorId }
-          });
-          const jsonData = await response.json();
-          setSensorValues(jsonData);
+      const response = await fetch(`${config.apiUrl}/api/get-sensor-value`, {
+        method: 'GET',
+        headers: { sensor_id: sensorId },
+      });
+      const jsonData = await response.json();
+      setSensorValues(jsonData);
     } catch (err) {
       console.error(err.message);
-    } finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     fetchSensorValue(sensorId);
@@ -44,7 +45,7 @@ const SensorValuePopup = ({ sensorId, onClose }) => {
             <GaugeChart
               id="sensor-gauge"
               nrOfLevels={10}
-              colors={["#FF5F6D", "#FFC371"]}
+              colors={['#FF5F6D', '#FFC371']}
               arcWidth={0.3}
               percent={sensorValues.length > 0 ? parseFloat(sensorValues[0].value) / 100 : 0}
               animate
