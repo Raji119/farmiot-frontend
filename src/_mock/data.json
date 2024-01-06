@@ -1,0 +1,14 @@
+[
+    {
+        "device_id": "64:bc:58:cd:07:58",
+        "logitude": "15",
+        "latitude": "15",
+        "description": "device 1"
+    },
+    {
+        "device_id": "99:bc:58:cd:07:58",
+        "logitude": "20",
+        "latitude": "20",
+        "description": "device 2"
+    }
+]

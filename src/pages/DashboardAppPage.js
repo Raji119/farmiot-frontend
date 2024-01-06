@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
+import config from '../config';
 import Loader from '../components/loading/Loading';
 // components
 import Iconify from '../components/iconify';
@@ -36,7 +37,7 @@ export default function DashboardAppPage() {
       // get Cookie
       const value = Cookies.get('token');
       if (value) {
-        const response = await fetch('http://localhost:4001/api/authenticate', {
+        const response = await fetch(`${config.apiUrl}/api/authenticate`, {
           method: "GET",
           headers: { "Content-Type": "application/json", "Authorization": value },
         })
